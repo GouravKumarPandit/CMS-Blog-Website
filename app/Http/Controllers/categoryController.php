@@ -47,7 +47,8 @@ class categoryController extends Controller
           $Category = new Category();
           $Category->name = $name; 
           $Category->save();
-          return redirect()->back()->with('status','Category Saved successfully');
+        //   return redirect()->back()->with('status','Category Saved successfully');
+        return redirect()->route('category.index')->with('status','Category Saved successfully');
            
     }
 
@@ -96,7 +97,8 @@ class categoryController extends Controller
       $name = $request->input('name'); 
       $editCat->name = $name;
       $editCat->save();
-      return redirect()->back()->with('status','Category Updated successfully');
+    //   return redirect()->back()->with('status','Category Updated successfully');
+    return redirect()->route('category.index')->with('status','Category Updated successfully');
     }
 
     /**

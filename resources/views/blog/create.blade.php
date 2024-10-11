@@ -25,31 +25,41 @@
 @endsection
 
 @section('main')
-    <div class="container py-4 rounded" style='background-color: rgb(223,223,223); margin-top:50px; width: 80%'>
+    <div class="container">
+        @include('includes.top-bar-actions')
+    </div>
+    <div class="container py-4 rounded" style='background-color: rgba(223,223,223, 0.9); margin-top:50px; width: 80%'>
         <div class="contact-form" style="margin-left: 20px; margin-right: 20px; ">
-            <h2 class="text-dark" style="border-bottom: 1px solid black">Create Post</h2>
+            <h2 class="text-dark" style="border-bottom: 1px solid black">
+                Create Post
+                <button title="Back" onclick="document.location ='{{ route('home.mypost') }}'" class='btn btn-sm btn-primary float-end'><i class="fa fa-reply"></i></button>
+            </h2>
             @if (Session('status'))
-                <p style="background: green;color:white;padding:1rem "> {{ Session('status') }} </p>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{ Session('status') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             @endif
+            <span class="text-smaller">Fields marked with <span style="color:red;">*</span> are mandatory</span>
             <form action="{{ route('blog.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <label for="title" ><span class="text-dark fw-bold">Title</span></label>
-                <input type="text" id="title" name="title" class='form-control' placeholder="Title" value="{{ old('title') }}" />
+                <label for="title" class="required-field"><span class="text-dark fw-bold">Title</span></label>
+                <input type="text" id="title" name="title" class='form-control' placeholder="Title" value="{{ old('title') }}" required />
                 @error('title')
                     {{-- The $attributeValue field is/must be $validationRule --}}
                     <p style="color: red; ">{{ $message }}</p>
                 @enderror
                 <!-- Image -->
-                <label for="image"><span class="text-dark fw-bold">Image</span></label>
-                <input type="file" id="image" name="image" class='form-control' />
+                <label for="image" class="required-field"><span class="text-dark fw-bold">Image</span></label>
+                <input type="file" id="image" name="image" class='form-control' required />
                 @error('image')
                     {{-- The $attributeValue field is/must be $validationRule --}}
                     <p style="color: red; ">{{ $message }}</p>
                 @enderror
 
                 <!-- Drop down -->
-                <label for="categories"><span class="text-dark fw-bold">Choose a category:</span></label>
-                <select name="category_id" id="categories" class='form-control form-select'>
+                <label for="categories" class="required-field"><span class="text-dark fw-bold">Choose a category:</span></label>
+                <select name="category_id" id="categories" class='form-control form-select' required>
                     <option selected disabled>Select option </option>
                     @foreach ($ddCat as $dd)
                         <option value="{{ $dd->id }}">{{ $dd->name }}</option>
@@ -61,7 +71,7 @@
                 @enderror
 
                 <!-- Body-->
-                <label for="body"><span class="text-dark fw-bold">Body</span></label>
+                <label for="body" class="required-field"><span class="text-dark fw-bold">Body</span></label>
                 @error('body')
                     <p style="color: red; ">{{ $message }}</p>
                 @enderror

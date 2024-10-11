@@ -33,12 +33,19 @@
             width: 150px !important;
             white-space: nowrap !important
         }
+
+        .dt-input{
+            padding: 3px;
+            border-radius: 3px;
+        }
     </style>
 @endsection
 
 @section('main')
-    <div class="container col-md-10" style='margin-top:50px'>
-        <div class="card">
+    <div class="container col-md-10">
+        @include('includes.top-bar-actions')
+
+        <div class="card mt-5" style="background-color: rgba(223,223,223, 0.9); ">
             <div class="card-body">
                 <div class="contact-form">
 					<h2 class=" d-flex justify-content-between" style="border-bottom: 1px solid black">
@@ -46,32 +53,39 @@
                         <a href="{{ route('category.create') }}" class='btn btn-sm btn-info mb-3'><i class="fas fa-plus"></i> Create Category</a>
                     </h2>
                     @if (Session('status'))
-                        <p style="background: green;color:white;padding:1rem "> {{ Session('status') }} </p>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ Session('status') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     @endif
 
-                    <table id="myTable">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($allCategory as $cat)
+                    <div class="table-responsive">
+                        <table id="myTable" class="table table-striped table-hover mb-4 mt-3">
+                            <thead>
                                 <tr>
-                                    <td>{{ $cat->name }}</td>
-                                    <td><a href="{{ route('category.edit', $cat) }}" class='btn btn-primary'><i class="fa-regular fa-pen-to-square"></i> Edit</a></td>
-                                    <td>
-                                        <form action="{{ route('category.delete', $cat) }}" method='POST'>
-                                            @csrf @method('delete')
-                                            <button type="submit" class='btn btn-danger'><i class="fa-solid fa-trash-can"></i> Delete</button>
-                                        </form>
-                                    </td>
+                                    <th><b>ID</b></th>
+                                    <th><b>Name</b></th>
+                                    <th><b>Edit</b></th>
+                                    <th><b>Delete</b></th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($allCategory as $cat)
+                                    <tr>
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{ $cat->name }}</td>
+                                        <td><a href="{{ route('category.edit', $cat) }}" class='btn btn-primary'><i class="fa fa-pen-square"></i> Edit</a></td>
+                                        <td>
+                                            <form action="{{ route('category.delete', $cat) }}" method='POST'>
+                                                @csrf @method('delete')
+                                                <button type="submit" class='btn btn-danger'><i class="fa fa-trash"></i> Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@
               <i class="fas fa-envelope-open-text"></i>
               <div>
                 <a href="mailto:info@UiMonk.co.ke">
-                  <p class="title">info@uimonk.co.in</p>
+                  <p class="title">panditgourav452@gmail.com</p>
                 </a>
                 <p class="subtitle">Send us your query anytime!</p>
               </div>

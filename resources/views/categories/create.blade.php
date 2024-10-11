@@ -12,8 +12,9 @@
 @endsection
 
 @section('main')
-    <div class="container col-md-8" style='margin-top:50px'>
-        <div class="card" style="background-color: rgb(223,223,223); ">
+    <div class="container col-md-8">
+        @include('includes.top-bar-actions')
+        <div class="card" style="background-color: rgba(223,223,223, 0.9); margin-top: 50px;">
             <div class="card-body">
                 <div class="contact-form">
                     <h2 class=" d-flex justify-content-between" style="border-bottom: 1px solid black">
@@ -21,13 +22,16 @@
                         <a href="{{ route('category.index') }}" class='btn btn-sm btn-info mb-3'><i class="fas fa-list"></i> All Category</a>
                     </h2>
                     @if (Session('status'))
-                        <p style="background: green;color:white;padding:1rem "> {{ Session('status') }} </p>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ Session('status') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     @endif
                     <form action="{{ route('category.store') }}" method="post">
                         @csrf
-                        <label for="name"><span class="text-dark">Name</span></label>
+                        <label for="name" class="required-field"><span class="text-dark">Name</span></label>
                         <input type="text" id="name" name="name" class='form-control' placeholder="Category Name"
-                            value="{{ old('name') }}" />
+                            value="{{ old('name') }}" required />
                         @error('name')
                             {{-- The $attributeValue field is/must be $validationRule --}}
                             <p style="color: red; margin-bottom: 0px;">{{ $message }}</p>

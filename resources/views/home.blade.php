@@ -11,7 +11,7 @@
     <div class="container" style='margin-top:150px'>
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card" style="background-color: rgba(223,223,223, 0.9);">
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
                     <div class="card-body">
@@ -27,8 +27,7 @@
                             Please log in to view this content.
                         @endif
 
-
-                        <div class="container mt-5" style='max-width:1200px'>
+                        <div class="container mt-5" style='max-width: 1200px;'>
                             <div class="row mb-3 mt-3">
                                 <div class="col-4 mb-3"> 
                                     <a href="{{ route('blog.create') }}" class='btn btn-success'><i class="fas fa-plus"></i> Create Post</a>
