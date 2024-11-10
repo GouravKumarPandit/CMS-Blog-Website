@@ -29,16 +29,12 @@
     </style>
 @endsection
 @section('main')
-    <main class="container">
-        <h2 class="header-title">All Blog Posts</h2>
+    <main class="container rounded mb-4" style="background-color: rgba(225,226,220, 0.9);">
+        <h2 class="header-title pt-4">All Blog Posts</h2>
         <div class="searchbar">
             <form action="">
                 <input type="text" placeholder="Search..." name="search" />
-
-                <button type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
-
+                <button type="submit" class="px-3 rounded"><i class="fa fa-search"></i></button>
             </form>
         </div>
         @if (Session('status'))
@@ -47,15 +43,25 @@
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
         @endif
+        @if(!count($allPosts))
+            <div class="col-12 border px-auto">
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong>NO POST FOUND!</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
         <div class="categories">
-            <ul>
-                @foreach ($fullCategory as $c)
-                    <li><a href="{{ route('blog.index', ['category' => $c->name]) }}">{{ $c->name }}</a></li>
+            <ul class="">
+                @foreach ($fullCategory as $category)
+                    <li>
+                        <a href="{{ route('blog.index', ['category' => $category->name]) }}" class="rounded">{{ $category->name }}</a>
+                    </li>
                 @endforeach
             </ul>
-        </div>
-        <section class="cards-blog latest-blog">
-
+        </div> 
+        <div class="horizontal-line-darker"></div>
+        <section class="cards-blog latest-blog mt-5">
             @forelse($allPosts as $posts)
                 <div class="card-blog-content">
                     <img src="{{ asset($posts->imagePath) }}" alt="" />
@@ -83,28 +89,9 @@
                     </h4>
                 </div>
             @empty
-
-                <p style="background: Red;color:white;padding:1rem "> No Post Found </p>
+                
             @endforelse
-
-
-
-
-
-
-
         </section>
-        <!-- pagination -->
-        <!-- <div class="pagination" id="pagination">
-                  <a href="">&laquo;</a>
-                  <a class="active" href="">1</a>
-                  <a href="">2</a>
-                  <a href="">3</a>
-                  <a href="">4</a>
-                  <a href="">5</a>
-                  <a href="">&raquo;</a>
-                </div> -->
-
         <div class='paginationBody'>
             {{ $allPosts->links('pagination::default') }}
         </div>

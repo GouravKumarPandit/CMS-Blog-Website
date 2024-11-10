@@ -8,7 +8,7 @@
 @endsection
 
 @section('main')
-    <div class="container" style='margin-top:150px'>
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" style="background-color: rgba(223,223,223, 0.9);">

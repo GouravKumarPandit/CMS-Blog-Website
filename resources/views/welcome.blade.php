@@ -3,17 +3,20 @@
 @section('main')
 	<header class="header">
 		<div class="header-text">
-			<h1>CMS Blog</h1>
+			<h1 class="cms-blog">CMS Blog</h1>
 			<h4>Home of verified news...</h4>
             <a class="text-info" style="text-decoration: underline !important;" href="{{ route('blog.create') }}">Create Your POST</a>
 		</div>
 		<div class="overlay"></div>
 	</header>
     <main class="container">
-		<h2 class="header-title">Latest Blog Posts</h2>
+		<h2 class="header-title">
+            Latest Blog Posts
+            <div class="horizontal-line-darker"></div>
+        </h2>
 		<section class="cards-blog latest-blog">
             @foreach ($allPosts as $posts)
-                <div class="card-blog-content px-3 rounded" style="background-color: rgba(223,223,223, 0.9); ">
+                <div class="card-blog-content px-3 rounded" style="background-color: rgba(202, 201, 201, 0.9); ">
                     <img src="{{ $posts->imagePath }}" alt="" />
                     <p>
 						<i class="fa fa-clock"></i> {{ $posts->created_at->diffForHumans() }}
