@@ -20,7 +20,7 @@
                 @endguest
 
                 @auth
-                    <a class='{{ Request::routeIs('home') ? 'active' : '' }} nav-link' href="{{ route('home') }}">Dashboard</a>
+                    <a class='{{ Request::routeIs('home') ? 'active' : '' }} link mx-3 py-3' href="{{ route('home') }}">Dashboard</a>
                 @endauth
             </div>
         </div>
